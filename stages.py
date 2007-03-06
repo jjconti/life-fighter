@@ -15,7 +15,7 @@ from life import Pattern
 #Classes definition
 
 class Stage(object):
-    '''A stage is what you see at the screen while playing..'''
+    '''A stage is what you see at the screen while playing.'''
     def __init__(self, clock, screen, bg, grid):
         self.clock = clock
         self.screen = screen
@@ -38,7 +38,7 @@ class Stage(object):
         self.grid.beat()
 
 class Game(Stage):
-    '''An abstract game'''
+    '''An abstract game.'''
 
     def __init__(self, clock, screen, bg, grid):
         Stage.__init__(self, clock, screen, bg, grid)
@@ -97,7 +97,7 @@ class Game(Stage):
         self.score.update(self.points)
         
     def _load_cells(self):
-        '''Randomly load a previusly persisted cells poblation'''
+        '''Randomly load a previusly persisted cells poblation.'''
 
         self.grid.kill_all()
         
@@ -157,7 +157,7 @@ class Game(Stage):
 
                         
 class Train(Game):
-    '''A game for training yourself'''
+    '''A game for training yourself.'''
 
     def __init__(self, clock, screen, bg, grid):
         self.title = TRAIN_TITLE
@@ -168,7 +168,7 @@ class Train(Game):
 
 
 class Moves(Game):
-    '''A game where moves count'''
+    '''A game where moves count.'''
 
     def __init__(self, clock, screen, bg, grid):
         self.title = MOVES_TITLE
@@ -213,7 +213,7 @@ class Moves(Game):
 
        
 class Clock(Game):
-    '''A game where time matters'''
+    '''A game where time matters.'''
 
     def __init__(self, clock, screen, bg, grid):
         self.title = CLOCK_TITLE
@@ -261,7 +261,7 @@ class Clock(Game):
         
 
 class Score(pygame.sprite.Sprite):
-    '''Points displayed at the screen'''
+    '''Points displayed at the screen.'''
 
     def __init__(self, w, x, y, default = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -282,7 +282,7 @@ class Score(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x,self.y))
 
 class Timer(pygame.sprite.Sprite):
-    '''Displayed at the screen your time at the Clock game'''
+    '''Display at the screen your time at the Clock game.'''
 
     def __init__(self, w, x, y, default):
         pygame.sprite.Sprite.__init__(self)
@@ -303,7 +303,7 @@ class Timer(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x,self.y))
 
 class StepCounter(pygame.sprite.Sprite):
-    '''Displayed at the screen your avaliable moves at Moves game'''
+    '''Display at the screen your avaliable moves at Moves game.'''
 
     def __init__(self, w, x, y, default):
         pygame.sprite.Sprite.__init__(self)
@@ -326,7 +326,7 @@ class StepCounter(pygame.sprite.Sprite):
 
         
 class Editor(Stage):
-    '''A life editor'''
+    '''A life editor.'''
 
     def __init__(self, clock, screen, bg, grid):
         Stage.__init__(self, clock, screen, bg, grid)
@@ -419,7 +419,7 @@ class Editor(Stage):
 
        
 class Life(Stage):
-    '''Conway\'s Game of Life with lots of patterns'''
+    '''Conway\'s Game of Life with lots of patterns.'''
 
     def __init__(self, clock, screen, bg, grid):
         Stage.__init__(self, clock, screen, bg, grid)
@@ -434,7 +434,7 @@ class Life(Stage):
         self.done = False
 
     def _load_patterns(self):
-        '''Return a list of persisted life patterns'''
+        '''Return a list of persisted life patterns.'''
 
         pat_files = [p for p in os.listdir(CONWAY_CELLS) if p.endswith(".pat")]
         patterns = [pickle.load(open(os.path.join(CONWAY_CELLS, p))) for p in pat_files]
@@ -532,7 +532,7 @@ class Life(Stage):
         self._load_cells(pat)
 
 class AliveCells(pygame.sprite.Sprite):
-    '''Number of alive cells in the grid'''
+    '''Number of alive cells in the grid.'''
 
     def __init__(self, w, x, y, default = 0):
         pygame.sprite.Sprite.__init__(self)
@@ -553,7 +553,7 @@ class AliveCells(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=(x,self.y))
             
 class Generation(pygame.sprite.Sprite):
-    '''Number of the current generation'''
+    '''Number of the current generation.'''
 
     def __init__(self, w, x, y, default = 0):
         pygame.sprite.Sprite.__init__(self)
