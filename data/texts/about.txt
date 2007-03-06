@@ -1,0 +1,6 @@
+Este juego está inspirado en el juego de la vida, un juego de cero jugadores.
+En Life Fighter el jugador puede controlar una célula del juego de la vida y deberá aprovecharse de las reglas de evolución para sobrevivir de generación en generación.
+El objetivo final es conseguir el mayor puntaje posible antes de extinguirse.
+El juego está dividido en niveles. En cada nivel los puntos que se obtienen por cada generación a la que se sobrevive (beat coins) son el doble de los que se obtenían en el nivel anterior. El primer nivel es el 0 en dónde el beat coin vale 1.
+Existen 2 modos de juego. En el primero el jugador dispone de un cierto número de pasos que puede dar por generacion. Este número va disminuyendo a medida que se avanzan de nivel.
+En el segundo modo de juego se pueden hacer todos los movimientos deseados.. mientras el tiempo así lopermita, el cual es el factor limitante en este modo. El tiempo disponible en cada generación disminuye a medida que se avanza de nivel.

@@ -1,0 +1,17 @@
+;; Object old/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "old/"
+  :tables (list 
+   (semanticdb-table "game.py"
+    :major-mode 'python-mode
+    :tags '(("\"\"\"
+This file is part of Life Fighter.
+\"\"\"" code nil nil [23 65]) ("pygame" include nil nil [83 96]) ("pygame.locals" include nil nil [97 124]) ("sprites" include nil nil [125 146]) ("if" code nil nil [148 200]) ("if" code nil nil [200 253]) ("WINDOW_TITLE" variable nil nil [270 304]) ("width" variable nil nil [305 316]) ("height" variable nil nil [317 329]) ("n1" variable nil nil [338 345]) ("n2" variable nil nil [346 353]) ("line" variable nil nil [401 409]) ("x_off" variable nil nil [410 420]) ("y_off" variable nil nil [421 431]) ("step" variable nil nil [499 508]) ("main" function nil nil [510 2382]) ("if" code nil nil [2431 2469]))
+    :file "game.py"
+    :pointmax 2469
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre3"
+  :semanticdb-version "2.0pre3"
+  )

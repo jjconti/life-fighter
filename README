@@ -1,0 +1,7 @@
+Execute run.py to start the game.
+
+First time only:
+$ chmod +x run.py
+
+Every time:
+$ ./run.py

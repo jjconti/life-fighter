@@ -1,0 +1,8 @@
+base referer
+rect $classstages_1_1Stage.html 6,54 120,78
+rect $classstages_1_1Editor.html 170,6 284,30
+rect $classstages_1_1Game.html 170,54 284,78
+rect $classstages_1_1Life.html 178,102 276,126
+rect $classstages_1_1Clock.html 338,6 450,30
+rect $classstages_1_1Moves.html 335,54 452,78
+rect $classstages_1_1Train.html 340,102 447,126

@@ -1,0 +1,7 @@
+base referer
+rect $classstages_1_1Editor.html 38,328 184,520
+rect $classstages_1_1Game.html 208,269 387,579
+rect $classstages_1_1Life.html 411,232 558,616
+rect $classstages_1_1Clock.html 6,665 184,857
+rect $classstages_1_1Moves.html 208,665 387,857
+rect $classstages_1_1Train.html 411,716 518,807

@@ -1,0 +1,8 @@
+Reglas de Evolución
+
+Todas las celdas, excepto las de los bordes, tienen 8 celdas vecinas.
+En una celda puede haber una célula viva o una célula muerta.
+
+1) Si una célula viva tiene 2 o 3 vecinas vivas, sobrevive a la siguiente generación.
+2) Si una célula muerta tiene exactamente 3 vecinas vivas, nace.
+3) Si una célula viva tiene 0 o 1 vecina, muere de soledad. Si tiene 4 o más, muere de sobrepoblación.
