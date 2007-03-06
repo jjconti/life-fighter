@@ -60,7 +60,7 @@ GAME_CELLS = os.path.join(CELLS, "games")
 CONWAY_CELLS = os.path.join(CELLS, "conway")
 
 ICON = os.path.join(IMGS, "life_icon.png")
-BGIMAGE1 = os.path.join(BACKGROUNDS, "paper.png")
+BGIMAGE1 = os.path.join(BACKGROUNDS, "paper3.png")
 PLAY = os.path.join(IMGS, "play.png")
 STOP = os.path.join(IMGS, "stop.png")
 NEXT = os.path.join(IMGS, "next.png")
