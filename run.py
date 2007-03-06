@@ -38,11 +38,16 @@ def main():
     #Create main menu
     font1 = pygame.font.Font(FONT1, 40)
     font2 = pygame.font.Font(FONT1, 35)
+    font_title = pygame.font.Font(FONT1, 65)
+    title_img = font_title.render(WINDOW_TITLE, True, logo_color)
+    topleft = (width - title_img.get_rect().width) / 2, 30
+    main_bg = background.copy()
+    main_bg.blit(title_img, topleft)
     sound1 = load_sound(TYPEW1)
     sound2 = load_sound(TYPEW2)
     options = ["Jugar", "Salon de la fama", "Vida", "Editor", \
                "Configuracion", "Ayuda", "Salir"]
-    menu = Menu(screen, background, font1, font2, color1, color2, sound1, sound2, options)
+    menu = Menu(screen, main_bg, font1, font2, color1, color2, sound1, sound2, options)
 
     #Create play menu
     font1 = pygame.font.Font(FONT1, 50)
