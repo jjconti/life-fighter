@@ -32,7 +32,7 @@ def main():
     screen.blit(background, (0, 0))
 
     #Create a grid and a game clock
-    grid = Grid(n1, n2, x_off, y_off, step, line)
+    #grid = Grid(n1, n2, x_off, y_off, step, line)
     clock = pygame.time.Clock()
 
     #Create main menu
@@ -61,15 +61,20 @@ def main():
         if op == 0:
             op = play.main_loop()
             if op == 0:
-                Train(clock, screen, background, grid).main_loop()
+                Train(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                      ).main_loop()
             elif op == 1:
-                Moves(clock, screen, background, grid).main_loop()
+                Moves(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                      ).main_loop()
             elif op == 2:
-                Clock(clock, screen, background, grid).main_loop()
+                Clock(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                      ).main_loop()
         elif op == 2:
-            Life(clock, screen, background, grid).main_loop()
+            Life(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                 ).main_loop()
         elif op == 3:
-            Editor(clock, screen, background, grid).main_loop()
+            Editor(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                   ).main_loop()
         elif op == 5:
             op = help.main_loop()
         elif op == 6:
