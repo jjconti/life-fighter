@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: latin-1 -*-
-"""
+'''
 Starts Life Fighter.
-"""
+'''
 
 #Import Modules
 import pygame
@@ -31,8 +31,7 @@ def main():
     background = load_image(BGIMAGE1)
     screen.blit(background, (0, 0))
 
-    #Create a grid and a game clock
-    #grid = Grid(n1, n2, x_off, y_off, step, line)
+    #Create the game clock
     clock = pygame.time.Clock()
 
     #Create main menu
@@ -59,7 +58,7 @@ def main():
                 sound1, sound2, "Ayuda", options)
 
     while True:
-        
+        #Refactoring needed..
         op = menu.main_loop()
 
         if op == 0:
@@ -84,12 +83,5 @@ def main():
         elif op == 6:
             sys.exit(0)
 
-    #Create a game
-    #game = Editor(clock, screen, background, grid)
-    #game = Train(clock, screen, background, grid)
-    #game = Moves(clock, screen, background, grid)
-    #game = Clock(clock, screen, background, grid)
-    #game.main_loop()
-    
 if __name__ == '__main__':
     main()
