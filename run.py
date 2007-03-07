@@ -39,25 +39,24 @@ def main():
     font1 = pygame.font.Font(FONT1, 40)
     font2 = pygame.font.Font(FONT1, 35)
     font_title = pygame.font.Font(FONT1, 65)
-    title_img = font_title.render(WINDOW_TITLE, True, logo_color)
-    topleft = (width - title_img.get_rect().width) / 2, 30
-    main_bg = background.copy()
-    main_bg.blit(title_img, topleft)
     sound1 = load_sound(TYPEW1)
     sound2 = load_sound(TYPEW2)
     options = ["Jugar", "Salon de la fama", "Vida", "Editor", \
                "Configuracion", "Ayuda", "Salir"]
-    menu = Menu(screen, main_bg, font1, font2, color1, color2, sound1, sound2, options)
+    menu = Menu(screen, background, font1, font2, font_title, color1, color2, logo_color, \
+                sound1, sound2, WINDOW_TITLE, options)
 
     #Create play menu
     font1 = pygame.font.Font(FONT1, 50)
     font2 = pygame.font.Font(FONT1, 45)
     options = ["Entrenamiento", "Cuenta pasos", "Contra Reloj", "Combinado", "Volver"]
-    play = Menu(screen, background, font1, font2, color1, color2, sound1, sound2, options)
+    play = Menu(screen, background, font1, font2, font_title, color1, color2, logo_color, \
+                sound1, sound2, "Jugar", options)
 
     #Create help menu
     options = ["El juego", "Reglas de evolucion", "Controles", "Creditos", "Volver"]
-    help = Menu(screen, background, font1, font2, color1, color2, sound1, sound2, options)
+    help = Menu(screen, background, font1, font2, font_title, color1, color2, logo_color, \
+                sound1, sound2, "Ayuda", options)
 
     while True:
         

@@ -16,12 +16,11 @@ from pygame.locals import *
 class Menu(object):
     '''A generic menu user interface. Allow both keyboard and mouse selection'''
 
-    def __init__(self, screen, background, font1, font2, color1, color2, \
-                 snd1, snd2, items, index=0):
+    def __init__(self, screen, background, font1, font2, font_title, color1, color2, \
+                 logo_color, snd1, snd2, title, items, index=0):
         '''font1 will be used for the selected item and font2 for unselected ones,
            sound1 will be used while switching items and sound2 when one is selected '''
         self.screen = screen
-        self.background = background
         self.items = items
         #self.n_items = len(items)
         self.last_index = len(items) - 1
@@ -37,6 +36,12 @@ class Menu(object):
         self.sounds["snd2"] = snd2
         
         #self.screen.blit(self.background, (0,0))
+        title_img = font_title.render(title, True, logo_color)
+        topleft = (background.get_rect().width - title_img.get_rect().width) / 2, 30
+        bg = background.copy()
+        bg.blit(title_img, topleft)
+        self.background = bg
+
 
         self._draw_items()
 
@@ -123,6 +128,13 @@ class Menu(object):
             self.unselected_rects = rects
 
                    
+class MenuTree(object):
+    '''A menu tree'''
+    def __init__(self, options):
+        self.root = options.keys()[0]
+        self.childs = options[0]
+
+
 def main():
     '''Test the Menu class'''
 
