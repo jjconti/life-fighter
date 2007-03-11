@@ -62,16 +62,20 @@ def main():
         op = menu.main_loop()
 
         if op == 0:
-            op = play.main_loop()
-            if op == 0:
-                Train(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
-                      ).main_loop()
-            elif op == 1:
-                Moves(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
-                      ).main_loop()
-            elif op == 2:
-                Clock(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
-                      ).main_loop()
+            p = True
+            while p:
+                op = play.main_loop()
+                if op == 0:
+                    Train(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                          ).main_loop()
+                elif op == 1:
+                    Moves(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                          ).main_loop()
+                elif op == 2:
+                    Clock(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                          ).main_loop()
+                elif op == 4:
+                    p = False
         elif op == 2:
             Life(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
                  ).main_loop()
