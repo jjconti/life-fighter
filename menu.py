@@ -78,7 +78,7 @@ class Menu(object):
                 if self.index > 0:
                     self.set_index(self.index - 1)
                 else:
-                    self.index = self.last_index
+                    self.set_index(self.last_index)
             elif event.key == K_DOWN:
                 if self.index < self.last_index:
                     self.set_index(self.index + 1)
