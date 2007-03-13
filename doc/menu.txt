@@ -1,6 +1,0 @@
-Conway's tour
-Worlds Editor
-Play (diferentes niveles y modos)
-     Tryining (dura l latidos)
-     Against time (s segundos entre latido y latido)
-     Counted moves (m movimientos maximo entre latido y latido)
