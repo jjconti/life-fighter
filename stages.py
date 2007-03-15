@@ -47,8 +47,8 @@ class Game(Stage):
         self.points = 0
         self.playing = True
         self.coin_value = 1
-        self.did_move = False
         self.name = self._load_cells()
+        self.hero_start_pos = self.grid.get_hero()
         print self.name
         self._add_labels()
         self.redraw_group.add(self.score)
@@ -58,13 +58,13 @@ class Game(Stage):
         grid = self.grid
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
-                self.did_move = grid.hero_left() or self.did_move
+                grid.hero_left()
             elif event.key == K_RIGHT:
-                self.did_move = grid.hero_right() or self.did_move
+                grid.hero_right()
             elif event.key == K_UP:
-                self.did_move = grid.hero_up() or self.did_move
+                grid.hero_up()
             elif event.key == K_DOWN:
-                self.did_move = grid.hero_down() or self.did_move
+                 grid.hero_down()
             elif event.key == K_n:
                 self.next_level()
             elif event.key == K_s:
@@ -114,9 +114,13 @@ class Game(Stage):
 
     def _beat(self):
         Stage._beat(self)
-        if self.grid.is_hero_alive() and self.did_move:
+        if self.grid.is_hero_alive() and not self.same_place():
             self.update_points()
-            self.did_move = False
+            self.hero_start_pos = self.grid.get_hero()
+
+    def same_place(self):
+        '''Did the hero chang its position since last beat?'''
+        return self.hero_start_pos == self.grid.get_hero()
             
     def _add_labels(self):
         
