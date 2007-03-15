@@ -173,6 +173,7 @@ class Grid(pygame.sprite.Sprite):
         return self.hero_alive
 
     def hero_left(self):
+        '''If hero can move to the left do it an return True, else return False'''
         i,j = self.i, self.j
         if self.is_hero_alive() and i > 0 and not self.cells[i-1,j].is_alive():
             self.cells[i,j].be_normal()
@@ -181,6 +182,7 @@ class Grid(pygame.sprite.Sprite):
             self.i, self.j = i,j
 
     def hero_right(self):
+        '''If hero can move to the right do it an return True, else return False'''
         i,j = self.i, self.j
         if self.is_hero_alive() and i < self.columns - 1 \
                                 and not self.cells[i+1,j].is_alive():
@@ -188,22 +190,30 @@ class Grid(pygame.sprite.Sprite):
             i += 1
             self.cells[i,j].be_hero()
             self.i, self.j = i,j
+            return True
+        return False
             
     def hero_up(self):
+        '''If hero can move up do it an return True, else return False'''
         i,j = self.i, self.j
         if self.is_hero_alive() and j > 0 and not self.cells[i,j-1].is_alive():
             self.cells[i,j].be_normal()
             j -= 1
             self.cells[i,j].be_hero()
             self.i, self.j = i,j
+            return True
+        return False
             
     def hero_down(self):
+        '''If hero can move down do it an return True, else return False'''
         i,j = self.i, self.j
         if self.is_hero_alive() and j < self.rows - 1 and not self.cells[i,j+1].is_alive():
             self.cells[i,j].be_normal()
             j += 1
             self.cells[i,j].be_hero()
             self.i, self.j = i,j
+            return True
+        return False
 
     def kill_all(self):
         for k in self.cells:

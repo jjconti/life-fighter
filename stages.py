@@ -47,6 +47,7 @@ class Game(Stage):
         self.points = 0
         self.playing = True
         self.coin_value = 1
+        self.did_move = False
         self.name = self._load_cells()
         print self.name
         self._add_labels()
@@ -57,13 +58,13 @@ class Game(Stage):
         grid = self.grid
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
-                grid.hero_left()
+                self.did_move = grid.hero_left() or self.did_move
             elif event.key == K_RIGHT:
-                grid.hero_right()
+                self.did_move = grid.hero_right() or self.did_move
             elif event.key == K_UP:
-                grid.hero_up()
+                self.did_move = grid.hero_up() or self.did_move
             elif event.key == K_DOWN:
-                grid.hero_down()
+                self.did_move = grid.hero_down() or self.did_move
             elif event.key == K_n:
                 self.next_level()
             elif event.key == K_s:
@@ -113,8 +114,9 @@ class Game(Stage):
 
     def _beat(self):
         Stage._beat(self)
-        if self.grid.is_hero_alive():
+        if self.grid.is_hero_alive() and self.did_move:
             self.update_points()
+            self.did_move = False
             
     def _add_labels(self):
         
