@@ -157,7 +157,7 @@ class Game(Stage):
     def next_level(self):
         self.level += 1
         self.coin_value *= 2
-        
+
     def finish_game(self):
         print "Game has finished: %i points" % self.points
         self.playing = False
@@ -173,6 +173,10 @@ class Train(Game):
     def control(self, event):
         Game.control(self, event)
 
+    def next_level(self):
+        Game.next_level(self)
+        self._beat()
+        	
 
 class Moves(Game):
     '''A game where moves count.'''
@@ -214,9 +218,13 @@ class Moves(Game):
         self.stepCounter = StepCounter(w, x, y + h, 10)
 
     def next_level(self):
-        Game.next_level(self)
-        self.max_moves -= 1
-        self._beat()
+        if not self.last_level():
+            Game.next_level(self)
+            self.max_moves -= 1
+            self._beat()
+
+    def last_level(self):
+        return self.max_moves == 1
 
        
 class Clock(Game):
@@ -262,9 +270,13 @@ class Clock(Game):
         self.timer = Timer(w, x, y + h, 10)
 
     def next_level(self):
-        Game.next_level(self)
-        self.max_time -= SECOND
-        self._beat()
+        if not self.last_level():
+            Game.next_level(self)
+            self.max_time -= SECOND
+            self._beat()
+
+    def last_level(self):
+        return self.max_time == SECOND
         
 
 class Score(pygame.sprite.Sprite):
