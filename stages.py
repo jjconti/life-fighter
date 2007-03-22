@@ -35,8 +35,8 @@ class Stage(object):
             if event.key == K_ESCAPE:
                 self.quit()
 
-    def _beat(self):
-        self.grid.beat()
+    def _beat(self, dead_alert=False):
+        self.grid.beat(dead_alert)
 
 class Game(Stage):
     '''An abstract game.'''
@@ -50,7 +50,6 @@ class Game(Stage):
         self.dead_alert = dead_alert
         self.name = self._load_cells()
         self.hero_start_pos = self.grid.get_hero()
-        print self.name
         self._add_labels()
         self.redraw_group.add(self.score)
 
@@ -114,7 +113,7 @@ class Game(Stage):
         return name[0].upper() + name[1:-4].lower()
 
     def _beat(self):
-        Stage._beat(self)
+        Stage._beat(self, self.dead_alert)
         if self.grid.is_hero_alive() and not self.same_place():
             self.update_points()
             self.hero_start_pos = self.grid.get_hero()
@@ -131,7 +130,6 @@ class Game(Stage):
         x = x_off + (n1 * step - w) / 2
         y = (y_off - h) / 2
         img = font.render(text, True, title_color)
-        #img = textOutline(font, text, title_color, black)
         self.background.blit(img, (x,y))
 
         text = "Score"
@@ -141,7 +139,6 @@ class Game(Stage):
         x = a + (width - a - w) / 2 
         y = y_off
         img = font.render(text, True, score_color)
-        #img = textOutline(font, text, score_color, black)
         self.background.blit(img, (x,y))
 
         self.score = Score(w, x, y + h)
@@ -265,7 +262,6 @@ class Clock(Game):
         x = a + (width - a - w) / 2 
         y = y_off + 100
         img = font.render(text, True, score_color)
-        #img = textOutline(font, text, score_color, black)
         self.background.blit(img, (x,y))
 
         self.timer = Timer(w, x, y + h, 10)

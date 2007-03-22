@@ -139,7 +139,7 @@ class Grid(pygame.sprite.Sprite):
                 pass
 	return count
 
-    def beat(self):
+    def beat(self, dead_alert):
         cells = self.cells
 
 	for i,j in cells:
@@ -157,8 +157,10 @@ class Grid(pygame.sprite.Sprite):
         if self.is_hero_alive() and not self.cells[self.i, self.j].is_alive():
             self.cells[self.i, self.j].color = cell_color
             self.hero_alive = False
+        #This fix a bug at dead alert mode but is not the best solution.
+        if dead_alert and self.is_hero_alive():
+            self.set_hero(self.i, self.j, dead_alert)
         
-
     def set_hero(self, i, j, dead_alert):
         if self.cells[i,j].is_alive():
             self.i = i
