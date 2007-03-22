@@ -66,13 +66,13 @@ def main():
             while p:
                 op = play.main_loop()
                 if op == 0:
-                    Train(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                    Train(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line), True\
                           ).main_loop()
                 elif op == 1:
-                    Moves(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                    Moves(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line), False\
                           ).main_loop()
                 elif op == 2:
-                    Clock(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line)\
+                    Clock(clock, screen, background, Grid(n1, n2, x_off, y_off, step, line), False\
                           ).main_loop()
                 elif op == 4:
                     p = False

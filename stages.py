@@ -41,12 +41,13 @@ class Stage(object):
 class Game(Stage):
     '''An abstract game.'''
 
-    def __init__(self, clock, screen, bg, grid):
+    def __init__(self, clock, screen, bg, grid, dead_alert):
         Stage.__init__(self, clock, screen, bg, grid)
         self.level = 0
         self.points = 0
         self.playing = True
         self.coin_value = 1
+        self.dead_alert = dead_alert
         self.name = self._load_cells()
         self.hero_start_pos = self.grid.get_hero()
         print self.name
@@ -58,13 +59,13 @@ class Game(Stage):
         grid = self.grid
         if event.type == KEYDOWN:
             if event.key == K_LEFT:
-                grid.hero_left()
+                grid.hero_left(self.dead_alert)
             elif event.key == K_RIGHT:
-                grid.hero_right()
+                grid.hero_right(self.dead_alert)
             elif event.key == K_UP:
-                grid.hero_up()
+                grid.hero_up(self.dead_alert)
             elif event.key == K_DOWN:
-                 grid.hero_down()
+                 grid.hero_down(self.dead_alert)
             elif event.key == K_n:
                 self.next_level()
             elif event.key == K_s:
@@ -108,7 +109,7 @@ class Game(Stage):
         pob = pickle.load(open(os.path.join(GAME_CELLS, name)))
         self.grid.add_living_cells(pob)
         i,j = random.choice(pob)
-        self.grid.set_hero(i,j)
+        self.grid.set_hero(i, j, self.dead_alert)
 
         return name[0].upper() + name[1:-4].lower()
 
@@ -166,9 +167,9 @@ class Game(Stage):
 class Train(Game):
     '''A game for training yourself.'''
 
-    def __init__(self, clock, screen, bg, grid):
+    def __init__(self, clock, screen, bg, grid, dead_alert):
         self.title = TRAIN_TITLE
-        Game.__init__(self, clock, screen, bg, grid)
+        Game.__init__(self, clock, screen, bg, grid, dead_alert)
         
     def control(self, event):
         Game.control(self, event)
@@ -181,9 +182,9 @@ class Train(Game):
 class Moves(Game):
     '''A game where moves count.'''
 
-    def __init__(self, clock, screen, bg, grid):
+    def __init__(self, clock, screen, bg, grid, dead_alert):
         self.title = MOVES_TITLE
-        Game.__init__(self, clock, screen, bg, grid)
+        Game.__init__(self, clock, screen, bg, grid, dead_alert)
         self.max_moves = 10
         self.moves = self.max_moves
         self.redraw_group.add(self.stepCounter)
@@ -230,9 +231,9 @@ class Moves(Game):
 class Clock(Game):
     '''A game where time matters.'''
 
-    def __init__(self, clock, screen, bg, grid):
+    def __init__(self, clock, screen, bg, grid, dead_alert):
         self.title = CLOCK_TITLE
-        Game.__init__(self, clock, screen, bg, grid)
+        Game.__init__(self, clock, screen, bg, grid, dead_alert)
         self.max_time = 10 * SECOND 
         self.time = self.max_time
         self.redraw_group.add(self.timer)

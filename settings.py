@@ -32,6 +32,7 @@ TIMEEVENT = USEREVENT + 1
 grid_color = (0,0,0)
 cell_color = (0,0,0)
 hero_color = (0,0,200)
+dead_color = (200, 0, 0)
 bg_color = (250, 250, 250)
 bg_color_game = (0, 5, 5)
 score_color = (255, 0, 0)

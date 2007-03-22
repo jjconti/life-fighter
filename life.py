@@ -69,8 +69,8 @@ class Cell(pygame.sprite.Sprite):
             pygame.draw.circle(self.image, self.color, pos, radius, 0)
             self.image.set_alpha(150)
 
-    def be_hero(self):
-        self.color = hero_color
+    def be_hero(self, color):
+        self.color = color
         self.birth_now()
 
     def be_normal(self):
@@ -146,7 +146,7 @@ class Grid(pygame.sprite.Sprite):
             n = self.alive_neights(i,j)
 	    c = cells[i,j]
 	    if c.is_alive():
-		if n <= 1 or n >= 4: c.die()
+		if n not in (2,3): c.die()
 	    else:
 		if n == 3: c.birth()
 
@@ -159,11 +159,12 @@ class Grid(pygame.sprite.Sprite):
             self.hero_alive = False
         
 
-    def set_hero(self, i, j):
+    def set_hero(self, i, j, dead_alert):
         if self.cells[i,j].is_alive():
             self.i = i
             self.j = j
-            self.cells[i,j].be_hero()
+            color = self._color_at(i, j, dead_alert)
+            self.cells[i,j].be_hero(color)
             self.hero_alive = True
             
     def get_hero(self):
@@ -172,48 +173,68 @@ class Grid(pygame.sprite.Sprite):
     def is_hero_alive(self):
         return self.hero_alive
 
-    def hero_left(self):
-        '''If hero can move to the left do it an return True, else return False'''
+    def hero_left(self, dead_alert):
+        '''If hero can move to the left do it an return True, else return False.
+        The dead_alert arg says if the alert is activate or not.'''
         i,j = self.i, self.j
         if self.is_hero_alive() and i > 0 and not self.cells[i-1,j].is_alive():
             self.cells[i,j].be_normal()
             i -= 1
-            self.cells[i,j].be_hero()
+            color = self._color_at(i, j, dead_alert)
+            self.cells[i,j].be_hero(color)
             self.i, self.j = i,j
+            return True
+        return False
 
-    def hero_right(self):
-        '''If hero can move to the right do it an return True, else return False'''
+    def hero_right(self, dead_alert):
+        '''If hero can move to the right do it an return True, else return False.
+        The dead_alert arg says if the alert is activate or not.'''
         i,j = self.i, self.j
         if self.is_hero_alive() and i < self.columns - 1 \
                                 and not self.cells[i+1,j].is_alive():
             self.cells[i,j].be_normal()
             i += 1
-            self.cells[i,j].be_hero()
+            color = self._color_at(i, j, dead_alert)
+            self.cells[i,j].be_hero(color)
             self.i, self.j = i,j
             return True
         return False
             
-    def hero_up(self):
-        '''If hero can move up do it an return True, else return False'''
+    def hero_up(self, dead_alert):
+        '''If hero can move up do it an return True, else return False.
+        The dead_alert arg says if the alert is activate or not.'''
         i,j = self.i, self.j
         if self.is_hero_alive() and j > 0 and not self.cells[i,j-1].is_alive():
             self.cells[i,j].be_normal()
             j -= 1
-            self.cells[i,j].be_hero()
+            color = self._color_at(i, j, dead_alert)
+            self.cells[i,j].be_hero(color)
             self.i, self.j = i,j
             return True
         return False
             
-    def hero_down(self):
-        '''If hero can move down do it an return True, else return False'''
+    def hero_down(self, dead_alert):
+        '''If hero can move down do it an return True, else return False.
+        The dead_alert arg says if the alert is activate or not.'''
         i,j = self.i, self.j
         if self.is_hero_alive() and j < self.rows - 1 and not self.cells[i,j+1].is_alive():
             self.cells[i,j].be_normal()
             j += 1
-            self.cells[i,j].be_hero()
+            color = self._color_at(i, j, dead_alert)
+            self.cells[i,j].be_hero(color)
             self.i, self.j = i,j
             return True
         return False
+
+    def _color_at(self, i, j, dead_alert):
+        '''If dead_alert is off (False) always hero color is returned.'''
+        if dead_alert:
+            if self.alive_neights(i,j) in (2,3):
+                return hero_color
+            else:
+                return dead_color
+        else:
+            return hero_color
 
     def kill_all(self):
         for k in self.cells:
