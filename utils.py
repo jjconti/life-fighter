@@ -50,3 +50,10 @@ class Circular(list):
         
     def prev(self, n=1):
         return self.next(-n)
+
+def create_surface(size, color, alpha):
+    s = pygame.Surface(size)
+    s.fill(color)
+    s.set_alpha(alpha)
+
+    return s

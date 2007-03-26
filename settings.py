@@ -44,8 +44,11 @@ color2 = (240, 240, 240)
 color3 = (0, 0, 200)
 color4 = (20, 20, 100)
 logo_color = (155, 16, 16)
+paper_color = (255, 250, 215)
 
 black = (0,0,0)
+white = (255, 255, 255)
+
 
 #Files
 
@@ -74,5 +77,5 @@ TYPEW2 = os.path.join(SOUNDS, "9098_ddohler_Typewriter.wav")
 
                       
 #FONT1 = os.path.join(FONTS,"FreeMonoBold.ttf")
-#FONT2 = os.path.join(FONTS, "FreeSerifBold.ttf")
 FONT1 = os.path.join(FONTS,"ds_moster.ttf")
+FONT2 = os.path.join(FONTS, "FreeSerifBold.ttf")

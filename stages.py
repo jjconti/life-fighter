@@ -157,7 +157,6 @@ class Game(Stage):
         self.coin_value *= 2
 
     def finish_game(self):
-        print "Game has finished: %i points" % self.points
         self.playing = False
 
                         
