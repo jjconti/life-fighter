@@ -17,19 +17,20 @@ class Menu(object):
     '''A generic menu user interface. Allow both keyboard and mouse selection'''
 
     def __init__(self, screen, background, font1, font2, font_title, color1, color2, \
-                 logo_color, snd1, snd2, title, items, index=0):
+                 logo_color, snd1, snd2, title, options, index=0):
         '''font1 will be used for the selected item and font2 for unselected ones,
            sound1 will be used while switching items and sound2 when one is selected '''
         self.screen = screen
-        self.items = items
+        self.items = [x[0] for x in options]
+        self.functions = [x[1] for x in options]
         #self.n_items = len(items)
-        self.last_index = len(items) - 1
+        self.last_index = len(self.items) - 1
         self.index = index
         self.done = False
         self.hor_step = max(font1.get_height(), font2.get_height())
         self.clock = pygame.time.Clock()
-        self.selected_imgs = [font1.render(text, True, color1) for text in items]
-        self.unselected_imgs = [font2.render(text, True, color2) for text in items]
+        self.selected_imgs = [font1.render(text, True, color1) for text in self.items]
+        self.unselected_imgs = [font2.render(text, True, color2) for text in self.items]
         self.unselected_rects = None
         self.sounds = {}
         self.sounds["snd1"] = snd1
@@ -66,7 +67,7 @@ class Menu(object):
             pygame.display.flip()
             
         self.done = False
-        return self.index
+        return self.functions[self.index]
 
     def control(self, event):
         if event.type == QUIT:
@@ -128,13 +129,6 @@ class Menu(object):
             self.unselected_rects = rects
 
                    
-class MenuTree(object):
-    '''A menu tree'''
-    def __init__(self, options):
-        self.root = options.keys()[0]
-        self.childs = options[0]
-
-
 def main():
     '''Test the Menu class'''
 

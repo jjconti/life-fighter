@@ -18,8 +18,12 @@ def load_image(fullname, colorkey=None):
         image.set_colorkey(colorkey, RLEACCEL)
     return image
 
-class NoneSound:
+class NoneSound(object):
     def play(self): pass
+
+
+class StageData(object):
+    pass
 
 
 def load_sound(fullname):

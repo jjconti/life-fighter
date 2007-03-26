@@ -17,11 +17,12 @@ from life import Pattern
 
 class Stage(object):
     '''A stage is what you see at the screen while playing.'''
-    def __init__(self, clock, screen, bg, grid):
-        self.clock = clock
-        self.screen = screen
-        self.background = bg.copy()
-        self.grid = grid
+    def __init__(self, sd, f_father):
+        self.clock = sd.clock
+        self.screen = sd.screen
+        self.background = sd.bg.copy()
+        self.grid = sd.grid
+        self.f_father = f_father
         self.cells_group = pygame.sprite.RenderUpdates()
         self.cells_group.add(self.grid.cells.values())
         self.redraw_group = pygame.sprite.RenderUpdates()
@@ -41,8 +42,8 @@ class Stage(object):
 class Game(Stage):
     '''An abstract game.'''
 
-    def __init__(self, clock, screen, bg, grid, dead_alert):
-        Stage.__init__(self, clock, screen, bg, grid)
+    def __init__(self, sd, dead_alert, f_father):
+        Stage.__init__(self, sd, f_father)
         self.level = 0
         self.points = 0
         self.playing = True
@@ -75,6 +76,7 @@ class Game(Stage):
                 print "pause game"
                 
     def main_loop(self):
+        
         while self.playing:
 
             self.clock.tick(10) #slower than 10 frame per second
@@ -91,6 +93,8 @@ class Game(Stage):
 
             if not self.grid.is_hero_alive():
                 self.finish_game()
+
+        return self.f_father
 
     def quit(self):
         self.playing = False
@@ -163,9 +167,9 @@ class Game(Stage):
 class Train(Game):
     '''A game for training yourself.'''
 
-    def __init__(self, clock, screen, bg, grid, dead_alert):
+    def __init__(self, sd, dead_alert, f_father):
         self.title = TRAIN_TITLE
-        Game.__init__(self, clock, screen, bg, grid, dead_alert)
+        Game.__init__(self, sd, dead_alert, f_father)
         
     def control(self, event):
         Game.control(self, event)
@@ -178,9 +182,9 @@ class Train(Game):
 class Moves(Game):
     '''A game where moves count.'''
 
-    def __init__(self, clock, screen, bg, grid, dead_alert):
+    def __init__(self, sd, dead_alert, f_father):
         self.title = MOVES_TITLE
-        Game.__init__(self, clock, screen, bg, grid, dead_alert)
+        Game.__init__(self, sd, dead_alert, f_father)
         self.max_moves = 10
         self.moves = self.max_moves
         self.redraw_group.add(self.stepCounter)
@@ -227,9 +231,9 @@ class Moves(Game):
 class Clock(Game):
     '''A game where time matters.'''
 
-    def __init__(self, clock, screen, bg, grid, dead_alert):
+    def __init__(self, sd, dead_alert, f_father):
         self.title = CLOCK_TITLE
-        Game.__init__(self, clock, screen, bg, grid, dead_alert)
+        Game.__init__(self, sd, dead_alert, f_father)
         self.max_time = 10 * SECOND 
         self.time = self.max_time
         self.redraw_group.add(self.timer)
@@ -343,8 +347,8 @@ class StepCounter(pygame.sprite.Sprite):
 class Editor(Stage):
     '''A life editor.'''
 
-    def __init__(self, clock, screen, bg, grid):
-        Stage.__init__(self, clock, screen, bg, grid)
+    def __init__(self, sd, f_father):
+        Stage.__init__(self, sd, f_father)
         self.sounds = {}
         self.sounds["bloop"] = load_sound(BLOOP)
         self._add_labels()
@@ -388,6 +392,8 @@ class Editor(Stage):
             self.update_sprites()
             self.redraw_group.draw(self.screen)
             pygame.display.flip() # USE UPDATE
+
+        return self.f_father
 
     def quit(self):
         self.done = True
@@ -436,8 +442,8 @@ class Editor(Stage):
 class Life(Stage):
     '''Conway\'s Game of Life with lots of patterns.'''
 
-    def __init__(self, clock, screen, bg, grid):
-        Stage.__init__(self, clock, screen, bg, grid)
+    def __init__(self, sd, f_father):
+        Stage.__init__(self, sd, f_father)
         self.patterns = Circular(self._load_patterns())
         self._load_cells(self.patterns[0])
         self.play_img = load_image(PLAY)
@@ -512,6 +518,8 @@ class Life(Stage):
             self.update_sprites()
             self.redraw_group.draw(self.screen)
             pygame.display.flip() # USE UPDATE
+
+        return self.f_father
 
     def quit(self):
         self.done = True
