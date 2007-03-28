@@ -22,7 +22,7 @@ class NoneSound(object):
     def play(self): pass
 
 
-class StageData(object):
+class DataBag(object):
     pass
 
 

@@ -43,7 +43,7 @@ color1 = (0, 5, 5)
 color2 = (240, 240, 240)
 color3 = (0, 0, 200)
 color4 = (20, 20, 100)
-logo_color = (155, 16, 16)
+color5 = (155, 16, 16)
 paper_color = (255, 250, 215)
 
 black = (0,0,0)

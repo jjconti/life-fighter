@@ -10,10 +10,12 @@ from pygame.locals import *
 del pygame.movieext
 
 from settings import *
+from help_text import *
 from utils import *
 from life import Grid
 from stages import *
 from menu import Menu
+from textPanel import TextPanel
 
 import sys
 
@@ -34,21 +36,31 @@ def main():
     #Create the game clock
     clock = pygame.time.Clock()
 
-    #Package stages data
-    sd = StageData()
-    sd.clock = clock
-    sd.screen = screen
-    sd.bg = background
-    sd.grid = Grid(n1, n2, x_off, y_off, step, line)
-
     #Menus data
     font0 = pygame.font.Font(FONT1, 65)
     font1 = pygame.font.Font(FONT1, 50)
     font2 = pygame.font.Font(FONT1, 45)
     font3 = pygame.font.Font(FONT1, 40)
     font4 = pygame.font.Font(FONT1, 35)
+    font5 = pygame.font.Font(FONT1, 25)
     sound1 = load_sound(TYPEW1)
     sound2 = load_sound(TYPEW2)
+
+    #Package stages data
+    sd = DataBag()
+    sd.clock = clock
+    sd.screen = screen
+    sd.bg = background
+    sd.grid = Grid(n1, n2, x_off, y_off, step, line)
+
+    #Package help data
+    hd = DataBag()
+    hd.screen = screen
+    hd.bg = background
+    hd.font1 = font1
+    hd.font2 = font5
+    hd.color1 = color1
+    hd.color2 = color5
 
     #Menu functions
 
@@ -77,17 +89,29 @@ def main():
                    ("Combinado", None),
                    ("Volver", f_main),]
         
-        return Menu(screen, background, font1, font2, font0, color1, color2, logo_color, \
+        return Menu(screen, background, font1, font2, font0, color1, color2, color5, \
                     sound1, sound2, "Jugar", options)
 
+    def f_hgame():
+        return TextPanel(hd, "El Juego", the_game, f_help)
+
+    def f_hrules():
+        return TextPanel(hd, "Las reglas", the_rules, f_help)
+
+    def f_hcontrols():
+        return TextPanel(hd, "Controles", controls, f_help)
+
+    def f_hcredits():
+        return TextPanel(hd, "Creditos", the_credits, f_help)
+
     def f_help():
-        options = [("El juego", None),
-                   ("Reglas de evolucion", None),
-                   ("Controles", None),
-                   ("Creditos", None),
+        options = [("El juego", f_hgame),
+                   ("Reglas de evolucion", f_hrules),
+                   ("Controles", f_hcontrols),
+                   ("Creditos", f_hcredits),
                    ("Volver", f_main),]
         
-        return Menu(screen, background, font1, font2, font0, color1, color2, logo_color, \
+        return Menu(screen, background, font1, font2, font0, color1, color2, color5, \
                 sound1, sound2, "Ayuda", options)
 
     def f_main():
@@ -99,7 +123,7 @@ def main():
                    ("Ayuda", f_help),
                    ("Salir", f_exit),]
         
-        return Menu(screen, background, font3, font4, font0, color1, color2, logo_color, \
+        return Menu(screen, background, font3, font4, font0, color1, color2, color5, \
                 sound1, sound2, WINDOW_TITLE, options)
 
 

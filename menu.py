@@ -8,7 +8,8 @@
 # I am sorry. I have no include exausted controls here, so be carefull with the size
 # of the images you use.
 
-import os, sys
+#import os
+import sys
 
 import pygame
 from pygame.locals import *
@@ -17,7 +18,7 @@ class Menu(object):
     '''A generic menu user interface. Allow both keyboard and mouse selection'''
 
     def __init__(self, screen, background, font1, font2, font_title, color1, color2, \
-                 logo_color, snd1, snd2, title, options, index=0):
+                 tit_color, snd1, snd2, title, options, index=0):
         '''font1 will be used for the selected item and font2 for unselected ones,
            sound1 will be used while switching items and sound2 when one is selected '''
         self.screen = screen
@@ -37,7 +38,7 @@ class Menu(object):
         self.sounds["snd2"] = snd2
         
         #self.screen.blit(self.background, (0,0))
-        title_img = font_title.render(title, True, logo_color)
+        title_img = font_title.render(title, True, tit_color)
         topleft = (background.get_rect().width - title_img.get_rect().width) / 2, 30
         bg = background.copy()
         bg.blit(title_img, topleft)
@@ -51,7 +52,7 @@ class Menu(object):
         #pygame.display.flip()
 
     def main_loop(self):
-        '''Returns the index of the selected item'''
+        '''Returns the function for the selected item'''
 
         while not self.done:
 
@@ -66,7 +67,6 @@ class Menu(object):
 
             pygame.display.flip()
             
-        self.done = False
         return self.functions[self.index]
 
     def control(self, event):
@@ -127,33 +127,3 @@ class Menu(object):
 
         if self.unselected_rects is None:
             self.unselected_rects = rects
-
-                   
-def main():
-    '''Test the Menu class'''
-
-    #FONTS_DIR = os.path.join("data", "fonts")
-    #FONT1 = os.path.join(FONTS_DIR,"FreeMonoBold.ttf")
-    FONT1 = None
-
-    white = (250, 250, 250)
-    color1 = (200, 0, 0)
-    color2 = (0, 100, 50)
-
-    pygame.init()
-    screen = pygame.display.set_mode((800,600))
-    #background = pygame.image.load(os.path.join("data", "imgs", "bg2.png"))
-    background = pygame.Surface((800,600))
-    background.fill(white)
-    font1 = pygame.font.Font(FONT1, 60)
-    font2 = pygame.font.Font(FONT1, 40)
-
-    items = ["Conway's Tour", "Worlds Editor", "Play", "About"]
-
-    menu = Menu(screen, background, font1, font2, color1, color2, items)
-
-    selection = menu.main_loop()
-    print selection
-    
-if __name__ == "__main__":
-    main()
