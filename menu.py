@@ -23,7 +23,7 @@ class Menu(object):
            sound1 will be used while switching items and sound2 when one is selected '''
         self.screen = screen
         self.items = [x[0] for x in options]
-        self.functions = [x[1] for x in options]
+        self.returns = [x[1] for x in options]
         #self.n_items = len(items)
         self.last_index = len(self.items) - 1
         self.index = index
@@ -52,7 +52,7 @@ class Menu(object):
         #pygame.display.flip()
 
     def main_loop(self):
-        '''Returns the function for the selected item'''
+        '''Returns the asosiated object for the selected item'''
 
         while not self.done:
 
@@ -67,7 +67,7 @@ class Menu(object):
 
             pygame.display.flip()
             
-        return self.functions[self.index]
+        return self.returns[self.index]
 
     def control(self, event):
         if event.type == QUIT:
@@ -85,6 +85,10 @@ class Menu(object):
                     self.set_index(self.index + 1)
                 else:
                     self.set_index(0)
+            #elif event.key == K_ESCAPE:
+            #    '''Do you think this feature is good?'''
+            #    self.index = self.last_index
+            #    self.select()
         if event.type == MOUSEMOTION:
             x,y = pygame.mouse.get_pos()
             for i in range(len(self.unselected_rects)):

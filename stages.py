@@ -11,6 +11,7 @@ from pygame.time import set_timer
 from settings import *
 from utils import *
 from life import Pattern
+from menu import Menu
 
 
 #Classes definition
@@ -34,7 +35,7 @@ class Stage(object):
             if event.key == K_SPACE:
                 self._beat()
             if event.key == K_ESCAPE:
-                self.quit()
+                self._quit()
 
     def _beat(self, dead_alert=False):
         self.grid.beat(dead_alert)
@@ -96,7 +97,7 @@ class Game(Stage):
 
         return self.f_father
 
-    def quit(self):
+    def _quit(self):
         self.playing = False
 
     def update_sprites(self):
@@ -161,7 +162,9 @@ class Game(Stage):
         self.coin_value *= 2
 
     def finish_game(self):
-        self.playing = False
+        #self.playing = False
+        self.name = self._load_cells()
+        self.hero_start_pos = self.grid.get_hero()
 
                         
 class Train(Game):
@@ -395,7 +398,7 @@ class Editor(Stage):
 
         return self.f_father
 
-    def quit(self):
+    def _quit(self):
         self.done = True
 
     def control(self, event):
@@ -521,7 +524,7 @@ class Life(Stage):
 
         return self.f_father
 
-    def quit(self):
+    def _quit(self):
         self.done = True
 
     def control(self, event):

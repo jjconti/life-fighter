@@ -15,7 +15,7 @@ from utils import *
 from life import Grid
 from stages import *
 from menu import Menu
-from textPanel import TextPanel
+from panels import TextPanel
 
 import sys
 
