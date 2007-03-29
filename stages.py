@@ -162,10 +162,46 @@ class Game(Stage):
         self.coin_value *= 2
 
     def finish_game(self):
-        #self.playing = False
-        self.name = self._load_cells()
-        self.hero_start_pos = self.grid.get_hero()
+        '''Before exiting, we ask if the player want to play again'''
 
+        def true():
+            return True
+
+        def false():
+            return False
+
+        def maybe():
+            return random.choice((True, False, True))
+
+        def m_not():
+            return random.choice((False, True, False))
+
+        def you():
+            return random.choice((True, False))   
+
+        options = [("Si!", true),
+                   ("No..", false),
+                   ("Tal vez", maybe),
+                   ("Creo que no", m_not),
+                   ("Decidi vos", you),]
+
+        font0 = pygame.font.Font(FONT1, 65)
+        font1 = pygame.font.Font(FONT1, 50)
+        font2 = pygame.font.Font(FONT1, 45)
+        sound1 = load_sound(TYPEW1)
+        sound2 = load_sound(TYPEW2)
+
+        bg = load_image(BGIMAGE1)
+        
+        f = Menu(self.screen, bg, font1, font2, font0, color1, color2, color5, \
+                sound1, sound2, "¿Jugar otra vez?", options).main_loop()
+
+        if f():        
+            self.name = self._load_cells()
+            self.hero_start_pos = self.grid.get_hero()
+        else:
+            self.playing = False
+            
                         
 class Train(Game):
     '''A game for training yourself.'''
