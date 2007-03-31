@@ -18,7 +18,7 @@ class TextPanel(object):
     '''A generic TextPanel for showing text information.'''
 
     def __init__(self, hd, title, lines, f_father):
-        '''font1 will be used for the title and font2 for the text in lines:
+        '''hd.font1 will be used for the title and hd.font2 for the text in lines:
         ["this is text for one line", "this for a second one", .. ]'''
         self.screen = hd.screen
         self.done = False
@@ -84,29 +84,82 @@ class TextPanel(object):
     def back(self):
         self.done = True
 
-                   
-def main():
-    '''Test the TextPanel class'''
+CURSOR = '|'
 
-    FONT1 = None
+class InputPanel(object):
+    '''A generic input panel.'''
 
-    white = (250, 250, 250)
-    color1 = (200, 0, 0)
-    color2 = (0, 100, 50)
-
-    pygame.init()
-    screen = pygame.display.set_mode((800,600))
-    #background = pygame.image.load(os.path.join("data", "imgs", "bg2.png"))
-    background = pygame.Surface((800,600))
-    background.fill(white)
-    font1 = pygame.font.Font(FONT1, 60)
-    font2 = pygame.font.Font(FONT1, 40)
-
-    lines = ["This is a test for the", "TextPanel class.", "Coded by Juanjo Conti", "jjconti@gnu.org"]
-
-    panel = TextPanel(screen, background, font1, font2, color1, color2, "Title", lines)
-
-    panel.main_loop()
+    def __init__(self, screen, background, font1, font2, color1, color2, \
+                 snd1, snd2, title):
+        '''font1 and color1 will be used for the title and font2 and color2 for the
+           input text. '''
+        self.cursor = CURSOR
+        self.text = ""
+        self.screen = screen
+        self.font = font2
+        self.color = color2
+        self.done = False
+        self.clock = pygame.time.Clock()
+        self.sounds = {}
+        self.sounds["snd1"] = snd1
+        self.sounds["snd2"] = snd2
         
-if __name__ == "__main__":
-    main()
+        title_img = font1.render(title, True, color1)
+        topleft = (background.get_rect().width - title_img.get_rect().width) / 2, 30
+        bg = background.copy()
+        bg.blit(title_img, topleft)
+        self.background = bg
+
+
+        self._draw_text()
+
+    def main_loop(self):
+        '''Returns the asosiated object for the selected item'''
+
+        while not self.done:
+
+            self.clock.tick(10)
+
+            self.screen.blit(self.background, (0,0))    
+
+            for event in pygame.event.get():
+                self.control(event)
+                
+            self._draw_text()
+
+            pygame.display.flip()
+            
+        return self.text
+
+    def control(self, event):
+        if event.type == QUIT:
+            sys.exit(0)
+        if event.type == KEYDOWN:
+            if event.key in (K_RETURN, K_KP_ENTER):
+                self.enter()
+            else:
+                char = event.unicode
+                if self.valid_char(char):
+                    self.text += char
+                    self.sounds["snd1"].play()
+                    self._draw_text()
+                if event.key == K_BACKSPACE:
+                    self.text = self.text[:-1]
+                    self.sounds["snd1"].play()
+                    self._draw_text()
+
+    def valid_char(self, char):
+        if char:
+            if char in u" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRTSUVWXYZ1234567890":
+                return True
+        return False
+               
+    def enter(self):
+        self.sounds["snd2"].play()
+        self.done = True
+
+    def _draw_text(self):
+        y = 250 # Tune this value as you need
+        text_img = self.font.render(self.text + self.cursor, True, self.color)
+        x = (self.screen.get_width() - text_img.get_width()) / 2
+        self.screen.blit(text_img, (x,y))

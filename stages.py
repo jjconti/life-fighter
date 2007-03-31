@@ -12,7 +12,8 @@ from settings import *
 from utils import *
 from life import Pattern
 from menu import Menu
-
+from panels import InputPanel
+from highscores import hof
 
 #Classes definition
 
@@ -164,6 +165,8 @@ class Game(Stage):
     def finish_game(self):
         '''Before exiting, we ask if the player want to play again'''
 
+        self.high_scores()
+
         def true():
             return True
 
@@ -201,6 +204,21 @@ class Game(Stage):
             self.hero_start_pos = self.grid.get_hero()
         else:
             self.playing = False
+
+    def high_scores(self):
+        if self.points > hof.minor_value():
+
+            font1 = pygame.font.Font(FONT1, 50)
+            font2 = pygame.font.Font(FONT1, 45)
+            sound1 = load_sound(TYPEW1)
+            sound2 = load_sound(TYPEW2)
+            bg = load_image(BGIMAGE1)
+            
+            name = InputPanel(self.screen, bg, font1, font2, \
+                              color1, color5, sound2, sound2, "Ingrese su nombre:").main_loop()
+            
+            hof.add(name, self.points)
+        
             
                         
 class Train(Game):

@@ -16,6 +16,7 @@ from life import Grid
 from stages import *
 from menu import Menu
 from panels import TextPanel
+from highscores import hof
 
 import sys
 
@@ -92,6 +93,9 @@ def main():
         return Menu(screen, background, font1, font2, font0, color1, color2, color5, \
                     sound1, sound2, "Jugar", options)
 
+    def f_scores():
+        return TextPanel(hd, "Salon de la fama", hof.score_lines(), f_main)
+
     def f_hgame():
         return TextPanel(hd, "El Juego", the_game, f_help)
 
@@ -116,7 +120,7 @@ def main():
 
     def f_main():
         options = [("Jugar", f_play),
-                   ("Salon de la fama", None),
+                   ("Salon de la fama", f_scores),
                    ("Vida", f_life),
                    ("Editor", f_editor),
                    ("Configuracion", None),
