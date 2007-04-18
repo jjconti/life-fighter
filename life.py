@@ -52,6 +52,8 @@ class Cell(pygame.sprite.Sprite):
     def die_now(self):
         self.state = DEAD
         self.next_state = DEAD
+        #Make sure no cell remember the hero color
+        self.color = cell_color
         self._image()
 		
     def update_state(self):
