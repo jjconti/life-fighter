@@ -1,7 +1,5 @@
-Execute run.py to start the game.
+My first game (real program?) ever coded.
 
-First time only:
-$ chmod +x run.py
+With Python 2 and PyGame installed. Run:
 
-Every time:
-$ ./run.py
+python run.py
