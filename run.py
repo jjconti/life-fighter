@@ -7,7 +7,6 @@ Starts Life Fighter.
 #Import Modules
 import pygame
 from pygame.locals import *
-del pygame.movieext
 
 from settings import *
 from help_text import *
