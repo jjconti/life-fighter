@@ -2,7 +2,7 @@
 
 from pygame.locals import USEREVENT
 
-WINDOW_TITLE = "Life Fighter 0.1"
+WINDOW_TITLE = "Life Fighter 0.2"
 width = 800
 height = 600
 
@@ -35,15 +35,16 @@ hero_color = (0,0,200)
 dead_color = (200, 0, 0)
 bg_color = (250, 250, 250)
 bg_color_game = (0, 5, 5)
-score_color = (255, 0, 0)
-time_color = (255, 0, 45)
-steps_color = (133, 189, 103)
-title_color = (250, 150, 150)
+#score_color = (255, 0, 0)
+#time_color = (255, 0, 45)
+#steps_color = (133, 189, 103)
+#title_color = (250, 150, 150)
 color1 = (0, 5, 5)
 color2 = (240, 240, 240)
-color3 = (0, 0, 200)
-color4 = (20, 20, 100)
+#color3 = (0, 0, 200)
+#color4 = (20, 20, 100)
 color5 = (155, 16, 16)
+score_color = time_color = steps_color = title_color = color3 = color4 = color5
 paper_color = (255, 250, 215)
 
 black = (0,0,0)
@@ -66,7 +67,8 @@ GAME_CELLS = os.path.join(CELLS, "games")
 CONWAY_CELLS = os.path.join(CELLS, "conway")
 
 ICON = os.path.join(IMGS, "life_icon.png")
-BGIMAGE1 = os.path.join(BACKGROUNDS, "paper3.png")
+#BGIMAGE1 = os.path.join(BACKGROUNDS, "paper3.png")
+BGIMAGE1 = os.path.join(BACKGROUNDS, "white.png")
 PLAY = os.path.join(IMGS, "play.png")
 STOP = os.path.join(IMGS, "stop.png")
 NEXT = os.path.join(IMGS, "next.png")
@@ -77,6 +79,7 @@ TYPEW1 = os.path.join(SOUNDS, "9744_Horn_typewriter-shorter.wav")
 TYPEW2 = os.path.join(SOUNDS, "9098_ddohler_Typewriter.wav")
 
                       
-#FONT1 = os.path.join(FONTS,"FreeMonoBold.ttf")
-FONT1 = os.path.join(FONTS,"ds_moster.ttf")
-FONT2 = os.path.join(FONTS, "FreeSerifBold.ttf")
+FONT1 = os.path.join(FONTS,"FreeMonoBold.ttf")
+#FONT1 = os.path.join(FONTS,"ds_moster.ttf")
+#FONT2 = os.path.join(FONTS, "FreeSerifBold.ttf")
+#FONT1 = None

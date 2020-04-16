@@ -71,11 +71,11 @@ class Game(Stage):
             elif event.key == K_n:
                 self.next_level()
             elif event.key == K_s:
-                print "on/off sounds"
+                print("on/off sounds")
             elif event.key == K_m:
-                print "on/off music"
+                print("on/off music")
             elif event.key == K_p:
-                print "pause game"
+                print("pause game")
                 
     def main_loop(self):
         
@@ -111,7 +111,7 @@ class Game(Stage):
         
         pobs = [p for p in os.listdir(GAME_CELLS) if p.endswith(".pob")]
         name = random.choice(pobs)
-        pob = pickle.load(open(os.path.join(GAME_CELLS, name)))
+        pob = pickle.load(open(os.path.join(GAME_CELLS, name), 'rb'))
         self.grid.add_living_cells(pob)
         i,j = random.choice(pob)
         self.grid.set_hero(i, j, self.dead_alert)
@@ -133,8 +133,8 @@ class Game(Stage):
         text = self.title + ": " + self.name
         font = pygame.font.Font(FONT1, 40)
         w,h = font.size(text)
-        x = x_off + (n1 * step - w) / 2
-        y = (y_off - h) / 2
+        x = x_off + (n1 * step - w) // 2
+        y = (y_off - h) // 2
         img = font.render(text, True, title_color)
         self.background.blit(img, (x,y))
 
@@ -142,7 +142,7 @@ class Game(Stage):
         font = pygame.font.Font(FONT1, 30)
         w,h = font.size(text)
         a = x_off + step * n1
-        x = a + (width - a - w) / 2 
+        x = a + (width - a - w) // 2 
         y = y_off
         img = font.render(text, True, score_color)
         self.background.blit(img, (x,y))
@@ -156,7 +156,7 @@ class Game(Stage):
 
     def update_points(self):
         self.points += self.coin_value
-        print self.points
+        print(self.points)
 
     def next_level(self):
         self.level += 1
@@ -197,7 +197,7 @@ class Game(Stage):
         bg = load_image(BGIMAGE1)
         
         f = Menu(self.screen, bg, font1, font2, font0, color1, color2, color5, \
-                sound1, sound2, "¿Jugar otra vez?", options).main_loop()
+                sound1, sound2, "ï¿½Jugar otra vez?", options).main_loop()
 
         if f():        
             self.name = self._load_cells()
@@ -267,7 +267,7 @@ class Moves(Game):
         font = pygame.font.Font(FONT1, 30)
         w,h = font.size(text)
         a = x_off + step * n1
-        x = a + (width - a - w) / 2 
+        x = a + (width - a - w) // 2 
         y = y_off + 100
         img = font.render(text, True, score_color)
         #img = textOutline(font, text, score_color, black)
@@ -305,7 +305,7 @@ class Clock(Game):
 
     def update_sprites(self):
         Game.update_sprites(self)
-        self.timer.update(self.time / SECOND)
+        self.timer.update(self.time // SECOND)
         
 
     def _beat(self):
@@ -319,7 +319,7 @@ class Clock(Game):
         font = pygame.font.Font(FONT1, 30)
         w,h = font.size(text)
         a = x_off + step * n1
-        x = a + (width - a - w) / 2 
+        x = a + (width - a - w) // 2 
         y = y_off + 100
         img = font.render(text, True, score_color)
         self.background.blit(img, (x,y))
@@ -348,13 +348,13 @@ class Score(pygame.sprite.Sprite):
         self.w = w
         self.x = x
         self.y = y
-        x += (w - self.image.get_width()) / 2
+        x += (w - self.image.get_width()) // 2
 
         self.rect = self.image.get_rect(topleft=(x,y))
         
     def update(self, points):
         self.image = self.font.render(str(points), True, score_color)
-        x = self.x + (self.w - self.image.get_width()) / 2
+        x = self.x + (self.w - self.image.get_width()) // 2
         self.rect = self.image.get_rect(topleft=(x,self.y))
 
 class Timer(pygame.sprite.Sprite):
@@ -369,13 +369,13 @@ class Timer(pygame.sprite.Sprite):
         self.w = w
         self.x = x
         self.y = y
-        x += (w - self.image.get_width()) / 2
+        x += (w - self.image.get_width()) // 2
 
         self.rect = self.image.get_rect(topleft=(x,y))
         
     def update(self, seconds):
         self.image = self.font.render(str(seconds), True, time_color)
-        x = self.x + (self.w - self.image.get_width()) / 2
+        x = self.x + (self.w - self.image.get_width()) // 2
         self.rect = self.image.get_rect(topleft=(x,self.y))
 
 class StepCounter(pygame.sprite.Sprite):
@@ -390,13 +390,13 @@ class StepCounter(pygame.sprite.Sprite):
         self.w = w
         self.x = x
         self.y = y
-        x += (w - self.image.get_width()) / 2
+        x += (w - self.image.get_width()) // 2
 
         self.rect = self.image.get_rect(topleft=(x,y))
         
     def update(self, seconds):
         self.image = self.font.render(str(seconds), True, steps_color)
-        x = self.x + (self.w - self.image.get_width()) / 2
+        x = self.x + (self.w - self.image.get_width()) // 2
         self.rect = self.image.get_rect(topleft=(x,self.y))
 
 
@@ -416,8 +416,8 @@ class Editor(Stage):
         text = EDITOR_TITLE
         font = pygame.font.Font(FONT1, 40)
         w,h = font.size(text)
-        x = x_off + (n1 * step - w) / 2
-        y = (y_off - h) / 2
+        x = x_off + (n1 * step - w) // 2
+        y = (y_off - h) // 2
         img = font.render(text, True, title_color)
         self.background.blit(img, (x,y))
 
@@ -425,7 +425,7 @@ class Editor(Stage):
         font = pygame.font.Font(FONT1, 30)
         w,h = font.size(text)
         a = x_off + step * n1
-        x = a + (width - a - w) / 2 
+        x = a + (width - a - w) // 2 
         y = y_off + 100
         img = font.render(text, True, score_color)
         self.background.blit(img, (x,y))
@@ -465,9 +465,9 @@ class Editor(Stage):
         elif event.type == MOUSEBUTTONDOWN:
             i,j =  event.pos
             i -= x_off
-            i /= step
+            i //= step
             j -= y_off
-            j /= step
+            j //= step
             
             if -1 < i < n1 and -1 < j < n2:
                 if event.button == 1:
@@ -480,19 +480,19 @@ class Editor(Stage):
     def _persist_cells(self, key):
         
         if key == K_c:
-            name = raw_input("Insert a name (Conway): ")
-            kind = raw_input("Insert a kind: ")
-            period= raw_input("Insert a period (if apply): ")
+            name = input("Insert a name (Conway): ")
+            kind = input("Insert a kind: ")
+            period= input("Insert a period (if apply): ")
             cells = [k for k in self.grid.cells if self.grid.cells[k].is_alive()]
             o = Pattern(name, kind, period, cells)
             file_name = os.path.join(CONWAY_CELLS, name + ".pat")
         elif key == K_g:
-            name = raw_input("Insert a name (game): ")
+            name = input("Insert a name (game): ")
             o = [k for k in self.grid.cells if self.grid.cells[k].is_alive()]
             file_name = os.path.join(GAME_CELLS, name + ".pob")
             
-        f = file(file_name, 'w')
-        pickle.dump(o,f)
+        f = open(file_name, 'wb')
+        pickle.dump(o, f)
         f.close()
 
        
@@ -515,7 +515,7 @@ class Life(Stage):
         '''Return a list of persisted life patterns.'''
 
         pat_files = [p for p in os.listdir(CONWAY_CELLS) if p.endswith(".pat")]
-        patterns = [pickle.load(open(os.path.join(CONWAY_CELLS, p))) for p in pat_files]
+        patterns = [pickle.load(open(os.path.join(CONWAY_CELLS, p), 'rb')) for p in pat_files]
         return patterns
 
     def _load_cells(self, pat):
@@ -527,8 +527,8 @@ class Life(Stage):
         text = LIFE_TITLE
         font = pygame.font.Font(FONT1, 40)
         w,h = font.size(text)
-        x = x_off + (n1 * step - w) / 2
-        y = (y_off - h) / 2
+        x = x_off + (n1 * step - w) // 2
+        y = (y_off - h) // 2
         img = font.render(text, True, title_color)
         self.background.blit(img, (x,y))
 
@@ -536,7 +536,7 @@ class Life(Stage):
         font = pygame.font.Font(FONT1, 30)
         w,h = font.size(text)
         a = x_off + step * n1
-        x = a + (width - a - w) / 2 
+        x = a + (width - a - w) // 2 
         y = y_off + 100
         img = font.render(text, True, color4)
         self.background.blit(img, (x,y))
@@ -545,7 +545,7 @@ class Life(Stage):
 
         y += 2 * h
         bw = self.play_img.get_rect().width
-        x = x + (w - 2 * bw) / 2
+        x = x + (w - 2 * bw) // 2
         self.play_rect = self.play_img.get_rect().move(x,y)
         self.stop_rect = self.stop_img.get_rect().move(x+bw,y)
         y += self.play_img.get_rect().height
@@ -598,7 +598,7 @@ class Life(Stage):
             self._beat()
 
     def play(self):
-        set_timer(TIMEEVENT, SECOND/2)
+        set_timer(TIMEEVENT, SECOND//2)
 
     def stop(self):
         set_timer(TIMEEVENT, 0)
@@ -623,13 +623,13 @@ class AliveCells(pygame.sprite.Sprite):
         self.w = w
         self.x = x
         self.y = y
-        x += (w - self.image.get_width()) / 2
+        x += (w - self.image.get_width()) // 2
 
         self.rect = self.image.get_rect(topleft=(x,y))
         
     def update(self, cells):
         self.image = self.font.render(str(cells), True, color3)
-        x = self.x + (self.w - self.image.get_width()) / 2
+        x = self.x + (self.w - self.image.get_width()) // 2
         self.rect = self.image.get_rect(topleft=(x,self.y))
             
 class Generation(pygame.sprite.Sprite):
@@ -644,11 +644,11 @@ class Generation(pygame.sprite.Sprite):
         self.w = w
         self.x = x
         self.y = y
-        x += (w - self.image.get_width()) / 2
+        x += (w - self.image.get_width()) // 2
 
         self.rect = self.image.get_rect(topleft=(x,y))
         
     def update(self, generation):
         self.image = self.font.render(str(generation), True, color3)
-        x = self.x + (self.w - self.image.get_width()) / 2
+        x = self.x + (self.w - self.image.get_width()) // 2
         self.rect = self.image.get_rect(topleft=(x,self.y))

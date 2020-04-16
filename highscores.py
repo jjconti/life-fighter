@@ -38,8 +38,8 @@ class HallOfFame(object):
 
         self.top_scores = top[:i] + [(name, score)] + top[i:-1]
 
-        f = file(HISCORES, 'w')
-        pickle.dump(self,f)
+        f = open(HISCORES, 'wb')
+        pickle.dump(self, f)
                 
 
 if not os.path.exists(HISCORES):
@@ -58,9 +58,9 @@ if not os.path.exists(HISCORES):
     hof = HallOfFame()
     hof.top_scores = top_scores
 
-    f = file(HISCORES, 'w')
+    f = open(HISCORES, 'wb')
     pickle.dump(hof, f)
 
 else:
-    f = file(HISCORES)
+    f = open(HISCORES, 'rb')
     hof = pickle.load(f)

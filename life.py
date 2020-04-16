@@ -16,8 +16,8 @@ class Cell(pygame.sprite.Sprite):
     
     def __init__(self, grid, state, x_off, y_off, i, j):        
         pygame.sprite.Sprite.__init__(self)
-	self.state = state
-	self.next_state = state
+        self.state = state
+        self.next_state = state
         self.grid = grid
         self.color = cell_color
         step = self.grid.step
@@ -30,13 +30,13 @@ class Cell(pygame.sprite.Sprite):
         return str(self.state)
 		
     def get_state(self):
-	return self.state
+        return self.state
 
     def is_alive(self):
         return self.state == ALIVE
 	    
     def set_next_state(self, state):
-	self.next_state = state
+        self.next_state = state
 
     def birth(self):
         self.set_next_state(ALIVE)
@@ -57,7 +57,7 @@ class Cell(pygame.sprite.Sprite):
         self._image()
 		
     def update_state(self):
-	self.state = self.next_state
+        self.state = self.next_state
         self._image()
         
     def _image(self):
@@ -66,7 +66,7 @@ class Cell(pygame.sprite.Sprite):
         self.image.set_colorkey(bg_color)
         self.image.fill(bg_color)
         if self.is_alive():
-            pos = (step/2 + 1,step/2 + 1)
+            pos = (step // 2 + 1, step // 2 + 1)
             radius = int(0.4 * step)
             pygame.draw.circle(self.image, self.color, pos, radius, 0)
             self.image.set_alpha(150)
@@ -85,12 +85,12 @@ class Grid(pygame.sprite.Sprite):
 
     def __init__(self, columns, rows, x_off, y_off, step, line):
         pygame.sprite.Sprite.__init__(self)
-	self.columns = columns
-	self.rows = rows
+        self.columns = columns
+        self.rows = rows
         self.step = step
-	self.cells = {}
+        self.cells = {}
 
-	for i in range(columns):
+        for i in range(columns):
             for j in range(rows):
                 self.cells[i,j] = Cell(self, DEAD, x_off, y_off, i, j)
 
@@ -123,7 +123,7 @@ class Grid(pygame.sprite.Sprite):
 				
     def add_cells(self, cells):
         '''cells is a dict of Cells'''
-	for k in cells:
+        for k in cells:
             self.cells[k] = cells[k]
 
     def add_living_cells(self, cells):
@@ -132,25 +132,25 @@ class Grid(pygame.sprite.Sprite):
             self.cells[k].birth_now()
 
     def alive_neights(self, i, j):
-	t = [(-1,-1), (0,-1), (1,-1), (-1,0), (1,0), (-1,1), (0,1), (1,1)]
-	count = 0
-	for o,p in t:
+        t = [(-1,-1), (0,-1), (1,-1), (-1,0), (1,0), (-1,1), (0,1), (1,1)]
+        count = 0
+        for o,p in t:
             try:
                 count += self.cells[i+o,j+p].get_state()
             except KeyError:
                 pass
-	return count
+        return count
 
     def beat(self, dead_alert):
         cells = self.cells
 
-	for i,j in cells:
+        for i,j in cells:
             n = self.alive_neights(i,j)
-	    c = cells[i,j]
-	    if c.is_alive():
-		if n not in (2,3): c.die()
-	    else:
-		if n == 3: c.birth()
+            c = cells[i,j]
+            if c.is_alive():
+                if n not in (2,3): c.die()
+            else:
+                if n == 3: c.birth()
 
         for k in cells:
             cells[k].update_state()
