@@ -1,14 +1,11 @@
-# -*- coding: latin-1 -*-
-
-# The TextPanel class was originally develop by Juan José Conti <jjconti@gnu.org>
+# The TextPanel class was originally develop by Juanjo Conti <jjconti@gmail.com>
 # for Life Fighter game. It is intentionally placed in a separeted file so you
 # can use it if it's fine for you. If not you can improve it :-)
 # Please use it under GPL licence like the rest of the game.
 
-# I am sorry. I have no include exausted controls here, so be carefull with the size
+# I'm sorry. I have no include exausted controls here, so be carefull with the size
 # of the images you use.
 
-#import os
 import sys
 
 import pygame

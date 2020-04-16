@@ -1,4 +1,3 @@
-# -*- coding: iso-8859-1 -*-
 the_game = ["Life Fighter consiste una una grilla del",
             "Juego de la Vida de Conway en la cual una",
             "poblacion de celulas va evolucionando.",
@@ -9,7 +8,7 @@ the_game = ["Life Fighter consiste una una grilla del",
             "le permita pasar a la siguiente generacion.",
             "",
             "Distintos modos de juego estan disponibles.",
-            "Mas informacion en http://juanjoconti.com.ar/life",]
+            "Mas informacion en https://github.com/jjconti/life-fighter",]
 
 the_rules = ["Cada celula puede estar viva (casilla rellena)",
              "o puede estar muerta (casilla vacia),",

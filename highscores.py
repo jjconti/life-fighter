@@ -1,5 +1,3 @@
-'''Highscore releted stuff'''
-
 import os, pickle
 
 from settings import *

@@ -1,4 +1,3 @@
-#Import Modules 
 import os
 
 import pygame
@@ -6,11 +5,10 @@ from pygame.locals import *
 
 from settings import *
 
-#Defined values
 DEAD = 0
 ALIVE = 1
 
-#Clsses definition
+
 class Cell(pygame.sprite.Sprite):
     '''A life cell'''
     
@@ -52,7 +50,7 @@ class Cell(pygame.sprite.Sprite):
     def die_now(self):
         self.state = DEAD
         self.next_state = DEAD
-        #Make sure no cell remember the hero color
+        # Make sure no cell remember the hero color
         self.color = cell_color
         self._image()
 		
@@ -155,11 +153,11 @@ class Grid(pygame.sprite.Sprite):
         for k in cells:
             cells[k].update_state()
 
-        #Update hero situation in needed
+        # Update hero situation in needed
         if self.is_hero_alive() and not self.cells[self.i, self.j].is_alive():
             self.cells[self.i, self.j].color = cell_color
             self.hero_alive = False
-        #This fix a bug at dead alert mode but is not the best solution.
+        # This fix a bug at dead alert mode but is not the best solution.
         if dead_alert and self.is_hero_alive():
             self.set_hero(self.i, self.j, dead_alert)
         

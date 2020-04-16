@@ -1,7 +1,3 @@
-# -*- coding: latin-1 -*-
-
-#Import Modules
-
 import os, sys, random, pickle
 
 import pygame
@@ -14,8 +10,6 @@ from life import Pattern
 from menu import Menu
 from panels import InputPanel
 from highscores import hof
-
-#Classes definition
 
 class Stage(object):
     '''A stage is what you see at the screen while playing.'''

@@ -1,14 +1,12 @@
-'''In this file are defined values used at the game.'''
-
 from pygame.locals import USEREVENT
 
 WINDOW_TITLE = "Life Fighter 0.2"
 width = 800
 height = 600
 
-#n1 = 18 * 7 / 2
-#n2 = 14 * 7 / 2
-#step = 10
+#n1 = 18 * 4
+#n2 = 14 * 4
+#step = 35 // 4
 n1 = 18
 n2 = 14
 step = 35

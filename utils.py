@@ -1,5 +1,3 @@
-#Utilities functions and classes
-
 import pygame
 import os
 
