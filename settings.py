@@ -16,11 +16,11 @@ y_off = 75
 
 #Stages
 
-TRAIN_TITLE = "Training"
-MOVES_TITLE = "Counted moves"
-CLOCK_TITLE = "Against clock"
+TRAIN_TITLE = "Entrenamiento"
+MOVES_TITLE = "Cuenta pasos"
+CLOCK_TITLE = "Contrarreloj"
 EDITOR_TITLE = "Editor"
-LIFE_TITLE = "Conway's Game of Life"
+LIFE_TITLE = "Juego de la Vida de Conway"
 
 SECOND = 1000 # in milliseconds
 TIMEEVENT = USEREVENT + 1

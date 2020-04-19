@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: latin-1 -*-
 '''
 Starts Life Fighter.
 '''
@@ -85,7 +84,7 @@ def main():
     def f_play():
         options = [("Entrenamiento", f_train),
                    ("Cuenta pasos", f_moves),
-                   ("Contra Reloj", f_clock),
+                   ("Contrarreloj", f_clock),
                    ("Combinado", None),
                    ("Volver", f_main),]
         
@@ -93,7 +92,7 @@ def main():
                     sound1, sound2, "Jugar", options)
 
     def f_scores():
-        return TextPanel(hd, "Salon de la fama", hof.score_lines(), f_main)
+        return TextPanel(hd, "Salón de la fama", hof.score_lines(), f_main)
 
     def f_hgame():
         return TextPanel(hd, "El Juego", the_game, f_help)
@@ -105,13 +104,13 @@ def main():
         return TextPanel(hd, "Controles", controls, f_help)
 
     def f_hcredits():
-        return TextPanel(hd, "Creditos", the_credits, f_help)
+        return TextPanel(hd, "Créditos", the_credits, f_help)
 
     def f_help():
         options = [("El juego", f_hgame),
-                   ("Reglas de evolucion", f_hrules),
+                   ("Reglas de evolución", f_hrules),
                    ("Controles", f_hcontrols),
-                   ("Creditos", f_hcredits),
+                   ("Créditos", f_hcredits),
                    ("Volver", f_main),]
         
         return Menu(screen, background, font1, font2, font0, color1, color2, color5, \
@@ -122,7 +121,7 @@ def main():
                    ("Salon de la fama", f_scores),
                    ("Vida", f_life),
                    ("Editor", f_editor),
-                   ("Configuracion", None),
+                   ("Configuración", None),
                    ("Ayuda", f_help),
                    ("Salir", f_exit),]
         

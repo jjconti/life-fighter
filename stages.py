@@ -176,11 +176,11 @@ class Game(Stage):
         def you():
             return random.choice((True, False))   
 
-        options = [("Si!", true),
-                   ("No..", false),
+        options = [("¡Si!", true),
+                   ("No...", false),
                    ("Tal vez", maybe),
                    ("Creo que no", m_not),
-                   ("Decidi vos", you),]
+                   ("Decidí vos", you),]
 
         font0 = pygame.font.Font(FONT1, 65)
         font1 = pygame.font.Font(FONT1, 50)
@@ -191,7 +191,7 @@ class Game(Stage):
         bg = load_image(BGIMAGE1)
         
         f = Menu(self.screen, bg, font1, font2, font0, color1, color2, color5, \
-                sound1, sound2, "�Jugar otra vez?", options).main_loop()
+                sound1, sound2, "¿Jugar otra vez?", options).main_loop()
 
         if f():        
             self.name = self._load_cells()
